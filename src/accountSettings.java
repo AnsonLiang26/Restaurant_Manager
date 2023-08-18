@@ -10,6 +10,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class accountSettings {
 
@@ -20,6 +22,7 @@ public class accountSettings {
 	private JTextField textField_3;
 	private JButton btnNewButton_1;
 	private JButton btnNewButton_2;
+	private JButton back = new JButton("Back");
 	/**
 	 * Create the application.
 	 */
@@ -69,6 +72,8 @@ public class accountSettings {
 		gbc_btnNewButton_1.gridy = 2;
 		panel.add(btnNewButton_1, gbc_btnNewButton_1);
 		
+		panel.add(back);
+		
 		textField_1 = new JTextField();
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
 		gbc_textField_1.insets = new Insets(0, 0, 5, 0);
@@ -109,7 +114,15 @@ public class accountSettings {
 		gbc_textField_3.gridy = 4;
 		panel.add(textField_3, gbc_textField_3);
 		textField_3.setColumns(10);
+		
+		//setting button
+		back.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Window.changePanel("restaurant");
+			}
+		});
 	}
+		
 
 	public JPanel getPanel() {
 		// TODO Auto-generated method stub

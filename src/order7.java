@@ -6,23 +6,39 @@ import javax.swing.border.LineBorder;
 import javax.swing.text.NumberFormatter;
 
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
+import java.io.File;
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.awt.event.ActionEvent;
 
 public class order7 {
 
+	// declaration section
 	private JFrame tim;
 	private JTextField textField;
 	private JTextField foodTwoLabel;
@@ -39,16 +55,14 @@ public class order7 {
 	String answer;
 	private JTextField calculatorScreen;
 
-
 	public order7() {
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	public void initialize() {
+
+		// name
 		tim = new JFrame();
-		tim.setTitle("Tim Hortons");
+		tim.setTitle("StarBucks");
 		tim.setVisible(true);
 		tim.setBounds(0, 0, 1368, 689);
 		tim.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,6 +74,7 @@ public class order7 {
 		tim.getContentPane().add(panel);
 		panel.setLayout(null);
 
+		// food items
 		JLabel foodOne = new JLabel("Bagel");
 		foodOne.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		foodOne.setBounds(11, 10, 219, 46);
@@ -75,14 +90,16 @@ public class order7 {
 		foodThree.setBounds(10, 146, 219, 46);
 		panel.add(foodThree);
 
+		// food entries
 		textField = new JFormattedTextField();
+
+		// error catch
 		NumberFormat format = NumberFormat.getInstance();
 		NumberFormatter formatter = new NumberFormatter(format);
 		formatter.setValueClass(Integer.class);
 		formatter.setMinimum(0);
 		formatter.setMaximum(Integer.MAX_VALUE);
 		formatter.setAllowsInvalid(false);
-		// If you want the value to be committed on each keystroke instead of focus lost
 		formatter.setCommitsOnValidEdit(true);
 		JFormattedTextField foodOneLabel = new JFormattedTextField(formatter);
 		foodOneLabel.setBounds(223, 26, 192, 25);
@@ -95,7 +112,6 @@ public class order7 {
 		formatter_1.setMinimum(0);
 		formatter_1.setMaximum(Integer.MAX_VALUE);
 		formatter_1.setAllowsInvalid(false);
-		// If you want the value to be committed on each keystroke instead of focus lost
 		formatter_1.setCommitsOnValidEdit(true);
 		foodTwoLabel = new JFormattedTextField(formatter_1);
 		foodTwoLabel.setColumns(10);
@@ -108,40 +124,73 @@ public class order7 {
 		formatter_2.setMinimum(0);
 		formatter_2.setMaximum(Integer.MAX_VALUE);
 		formatter_2.setAllowsInvalid(false);
-		// If you want the value to be committed on each keystroke instead of focus lost
 		formatter_2.setCommitsOnValidEdit(true);
 		foodThreeLabel = new JFormattedTextField(formatter_2);
 		foodThreeLabel.setColumns(10);
 		foodThreeLabel.setBounds(223, 167, 192, 25);
 		panel.add(foodThreeLabel);
 
+		// menu
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(445, 48, 338, 294);
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0), 8));
 		tim.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 
+		JLabel lblBagel = new JLabel("Bagel $1.39");
+		lblBagel.setBounds(10, 10, 318, 46);
+		lblBagel.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		panel_1.add(lblBagel);
+
+		JLabel lblCubanoSandwich = new JLabel("Cubano Sandwich $5.99");
+		lblCubanoSandwich.setBounds(10, 51, 318, 46);
+		lblCubanoSandwich.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		panel_1.add(lblCubanoSandwich);
+
+		JLabel lblShortbreadCookies = new JLabel("Shortbread Cookies $0.99");
+		lblShortbreadCookies.setBounds(10, 94, 318, 46);
+		lblShortbreadCookies.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		panel_1.add(lblShortbreadCookies);
+
+		JLabel lblTallCoffee = new JLabel("Tall Coffee $1.85");
+		lblTallCoffee.setBounds(10, 135, 318, 46);
+		lblTallCoffee.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		panel_1.add(lblTallCoffee);
+
+		JLabel lblGrandeCoffee = new JLabel("Grande Coffee $2.10");
+		lblGrandeCoffee.setBounds(10, 175, 318, 46);
+		lblGrandeCoffee.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		panel_1.add(lblGrandeCoffee);
+
+		JLabel lblVentiCoffee = new JLabel("Venti Coffee $2.45");
+		lblVentiCoffee.setBounds(10, 211, 318, 46);
+		lblVentiCoffee.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		panel_1.add(lblVentiCoffee);
+
+		// price panel
 		JPanel panel_3 = new JPanel();
 		panel_3.setBounds(445, 347, 338, 295);
 		panel_3.setBorder(new LineBorder(new Color(0, 0, 0), 8));
 		tim.getContentPane().add(panel_3);
 		panel_3.setLayout(null);
 
+		// cost
 		JLabel cost = new JLabel("Cost");
 		cost.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		cost.setBounds(10, 10, 73, 60);
 		panel_3.add(cost);
 
+		// tax
 		JLabel tax = new JLabel("Tax");
 		tax.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		tax.setBounds(10, 93, 73, 60);
 		panel_3.add(tax);
-
 		JLabel total = new JLabel("");
 		total.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		total.setBounds(10, 169, 73, 60);
 		panel_3.add(total);
 
+		// cost entry
 		JLabel costLabel = new JLabel("");
 		costLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		costLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -149,6 +198,7 @@ public class order7 {
 		costLabel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panel_3.add(costLabel);
 
+		// tax entry
 		JLabel taxLabel = new JLabel("");
 		taxLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		taxLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -156,6 +206,7 @@ public class order7 {
 		taxLabel.setBounds(95, 108, 233, 29);
 		panel_3.add(taxLabel);
 
+		// total
 		JLabel lblNewLabel_1_1_2 = new JLabel("Total");
 		lblNewLabel_1_1_2.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblNewLabel_1_1_2.setBounds(10, 169, 73, 60);
@@ -178,6 +229,7 @@ public class order7 {
 		tabbedPane.setBounds(10, 10, 531, 574);
 		panel_4.add(tabbedPane);
 
+		// receipt
 		JPanel panel_2 = new JPanel();
 		tabbedPane.addTab("Receipt", null, panel_2, null);
 		panel_2.setLayout(null);
@@ -198,6 +250,7 @@ public class order7 {
 		panel_6.add(calculatorScreen);
 		calculatorScreen.setColumns(10);
 
+		// buttons
 		JButton seven = new JButton("7");
 		seven.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -330,7 +383,6 @@ public class order7 {
 		minus.setBounds(403, 98, 85, 35);
 		panel_6.add(minus);
 
-		// eyes here
 		JButton multiply = new JButton("*");
 		multiply.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -352,6 +404,7 @@ public class order7 {
 		dot.setBounds(176, 164, 119, 35);
 		panel_6.add(dot);
 
+		// equals button
 		JButton equals = new JButton("=");
 		equals.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -392,6 +445,7 @@ public class order7 {
 		panel_5.setLayout(null);
 		panel_5.setBorder(new LineBorder(new Color(0, 0, 0), 8));
 
+		// drink items
 		JLabel drinkOne = new JLabel("Tall Coffee");
 		drinkOne.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		drinkOne.setBounds(11, 10, 219, 46);
@@ -413,7 +467,6 @@ public class order7 {
 		formatter_3.setMinimum(0);
 		formatter_3.setMaximum(Integer.MAX_VALUE);
 		formatter_3.setAllowsInvalid(false);
-		// If you want the value to be committed on each keystroke instead of focus lost
 		formatter_3.setCommitsOnValidEdit(true);
 		drinkOneLabel = new JFormattedTextField(formatter_3);
 		drinkOneLabel.setColumns(10);
@@ -426,7 +479,6 @@ public class order7 {
 		formatter_4.setMinimum(0);
 		formatter_4.setMaximum(Integer.MAX_VALUE);
 		formatter_4.setAllowsInvalid(false);
-		// If you want the value to be committed on each keystroke instead of focus lost
 		formatter_4.setCommitsOnValidEdit(true);
 		drinkTwoLabel = new JFormattedTextField(formatter_4);
 		drinkTwoLabel.setColumns(10);
@@ -439,13 +491,13 @@ public class order7 {
 		formatter_5.setMinimum(0);
 		formatter_5.setMaximum(Integer.MAX_VALUE);
 		formatter_5.setAllowsInvalid(false);
-		// If you want the value to be committed on each keystroke instead of focus lost
 		formatter_1.setCommitsOnValidEdit(true);
 		drinkThreeLabel = new JFormattedTextField(formatter_5);
 		drinkThreeLabel.setColumns(10);
 		drinkThreeLabel.setBounds(223, 167, 192, 25);
 		panel_5.add(drinkThreeLabel);
 
+		// back button
 		JButton back = new JButton("Back");
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -455,6 +507,7 @@ public class order7 {
 		back.setBounds(1241, 0, 113, 38);
 		tim.getContentPane().add(back);
 
+		// print receipt
 		JButton receiptPrint = new JButton("Print Receipt");
 		receiptPrint.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -464,6 +517,7 @@ public class order7 {
 		receiptPrint.setBounds(1130, 0, 113, 38);
 		tim.getContentPane().add(receiptPrint);
 
+		// total
 		JButton totalCalculate = new JButton("Total");
 		totalCalculate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -472,6 +526,7 @@ public class order7 {
 						|| drinkTwoLabel.getText().equals("") || drinkThreeLabel.getText().equals(""))
 					return;
 
+				// prices
 				double itemOne = Double.parseDouble(foodOneLabel.getText());
 				double priceOne = 1.39;
 				double mealOne;
@@ -529,6 +584,7 @@ public class order7 {
 		totalCalculate.setBounds(1018, 0, 113, 38);
 		tim.getContentPane().add(totalCalculate);
 
+		// receipt
 		JButton receiptCalculate = new JButton("Receipt");
 		receiptCalculate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -543,10 +599,12 @@ public class order7 {
 				double Qty5 = Double.parseDouble(drinkTwoLabel.getText());
 				double Qty6 = Double.parseDouble(drinkThreeLabel.getText());
 
+				// printing receipt
 				receipt.append("\nBagel:\t\t" + Qty1 + "\nCubano Sandwich:\t" + Qty2 + "\nShortbread Cookies:\t\t" + Qty3
 						+ "\nTall Coffee:\t\t" + Qty4 + "\nGrande Coffee:\t\t" + Qty5 + "\nVenti Coffee:\t\t" + Qty6
 						+ "\n\nThanks for ordering!");
 				
+				// adding to history
 				restaurant.addOrderToHistory(("\nBagel:\t\t" + Qty1 + "\nCubano Sandwich:\t" + Qty2 + "\nShortbread Cookies:\t\t" + Qty3
 						+ "\nTall Coffee:\t\t" + Qty4 + "\nGrande Coffee:\t\t" + Qty5 + "\nVenti Coffee:\t\t" + Qty6
 						+ "\n\nThanks for ordering!"));
@@ -557,4 +615,36 @@ public class order7 {
 		receiptCalculate.setBounds(908, 0, 113, 38);
 		tim.getContentPane().add(receiptCalculate);
 	}
+
+	// printing receipt
+	private void printReceipt(JPanel panel) {
+		PrinterJob printerJob = PrinterJob.getPrinterJob();
+		printerJob.setJobName("Print Receipt");
+		printerJob.setPrintable(new Printable() {
+			public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
+				if (pageIndex > 0) {
+					return Printable.NO_SUCH_PAGE;
+				}
+				Graphics2D graphics2D = (Graphics2D) graphics;
+				graphics2D.translate(pageFormat.getImageableX() * 2, pageFormat.getImageableY() * 2);
+				graphics2D.scale(0.5, 0.5);
+				;
+				panel.paint(graphics2D);
+				return Printable.PAGE_EXISTS;
+
+			}
+		});
+
+		// error
+		boolean result = printerJob.printDialog();
+		if (result) {
+			try {
+				printerJob.print();
+			} catch (PrinterException printerException) {
+				JOptionPane.showMessageDialog(null, "Could not print", "Error", JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
+
+	}
+
 }

@@ -16,7 +16,7 @@ import java.awt.event.ActionListener;
 public class Search {
 
 	private JPanel panel;
-	private JButton[] userChoices = {new JButton("McDonalds"), new JButton("Subway"), new JButton("Wendy's"), new JButton("Burger King"), new JButton("Congee Queen"), new JButton("Tim Hortons"), new JButton("StarBucks"), new JButton("Taco Bell"), new JButton("Pizza Pizza")};
+	private JButton[] userChoices = {new JButton("McDonalds"), new JButton("Subway"), new JButton("Wendy's"), new JButton("Burger King"), new JButton("Congee Queen"), new JButton("Tim Hortons"), new JButton("Starbucks"), new JButton("Taco Bell"), new JButton("Pizza Pizza")};
 	private String keyword = "";
 	private JTextField searchBar = new JTextField(10);
 	private JButton btnNewButton_6 = new JButton("Search");
